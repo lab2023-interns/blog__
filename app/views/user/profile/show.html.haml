@@ -5,11 +5,17 @@
 .panel.panel-default
   .panel-heading
     %i.icon-edit.icon-large
-    = t('tt.show', resource_name: user.model_name.human)
+    = t('tt.show', resource_name: User.model_name.human)
   .panel-body
     = show_for @profile do |s|
+      = s.attribute :id
       = s.attribute :name
       = s.attribute :surname
       = s.attribute :email
+      = s.attribute :time_zone
       = s.attribute :created_at
       = s.attribute :updated_at
+      .panel-footer
+        = link_to  edit_user_profile_path(@profile), class: 'btn btn-link' do
+          %i.fa.fa-pencil
+          Profil bilgilerini güncelle

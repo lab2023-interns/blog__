@@ -1,4 +1,5 @@
 !!!
+
 %html{lang: I18n.locale}
   %head
     %title= content_for?(:title) ? "#{yield(:title)} - Project_name" : 'Project_name'
@@ -13,18 +14,57 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
     = yield :head
+
   %body
     = render 'layouts/partials/warnings'
     .container-narrow
-      .masthead
-        %ul.nav.nav-pills.pull-right
-          %li.active
-            %a{href: "/"}
-              = t('navbar.home_page')
-        %h3.muted= link_to "Project_name", root_path
-      %hr/
+      %nav.navbar.navbar-default
+        .container-fluid
+          / Brand and toggle get grouped for better mobile display
+          .navbar-header
+            %button.navbar-toggle.collapsed{"aria-expanded" => "false", "data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
+              %span.sr-only Toggle navigation
+              %span.icon-bar
+              %span.icon-bar
+              %span.icon-bar
+            %a.navbar-brand{:href => "#"} Blog
+          / Collect the nav links, forms, and other content for toggling
+          #bs-example-navbar-collapse-1.collapse.navbar-collapse
+            %ul.nav.navbar-nav
+              %li.active
+
+              %li
+                %span.caret
+                %ul.dropdown-menu
+                  %li
+                    %a{:href => "#"} Action
+                  %li
+                    %a{:href => "#"} Another action
+                  %li
+                    %a{:href => "#"} Something else here
+                  %li.divider{:role => "separator"}
+                  %li
+                    %a{:href => "#"} Separated link
+                  %li.divider{:role => "separator"}
+                  %li
+                    %a{:href => "#"} One more separated link
+            %form.navbar-form.navbar-left
+              .form-group
+                %input.form-control{:placeholder => "Search", :type => "text"}/
+              %button.btn.btn-default{:type => "submit"} Submit
+            %ul.nav.navbar-nav.navbar-right
+              %li
+                = link_to new_user_session_path do
+                  %i.fa.fa-pencil-square-o
+                  Giriş Yap
+              %li
+                = link_to new_user_registration_path do
+                  %i.fa.fa-user
+                  Üye Ol
+
       = render partial: 'layouts/partials/messages'
       = yield
       %hr/
+
       .footer
         %p Project_name Copyright &copy; #{Time.zone.now.year} Tüm Hakları Saklıdır.
